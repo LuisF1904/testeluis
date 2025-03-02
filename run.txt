@@ -1,0 +1,2 @@
+backend - node src/server.js
+frontend - pasta cliente - npm run dev
