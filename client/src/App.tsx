@@ -18,25 +18,24 @@ function App() {
   // Função para buscar viaturas do backend
   const fetchViaturas = async () => {
     try {
-      setLoading(true); // Inicia o carregamento
-      setError(null); // Reseta erros anteriores
+      setLoading(true);
+      setError(null);
 
-      const response = await fetch('/api/viaturas'); // Chamada à API
+      const response = await fetch('http://localhost:5000/api/viaturas'); // URL corrigida
       if (!response.ok) {
         throw new Error(`Erro ao buscar viaturas: ${response.statusText}`);
       }
 
       const data: Viatura[] = await response.json();
-      setViaturas(data); // Atualiza o estado com os dados recebidos
+      setViaturas(data);
     } catch (error: unknown) {
       if (error instanceof Error) {
-        console.error('Erro ao buscar viaturas:', error);
         setError(error.message);
       } else {
-        setError('Erro desconhecido ao buscar dados.');
+        setError("Ocorreu um erro desconhecido ao buscar as viaturas.");
       }
     } finally {
-      setLoading(false); // Finaliza o carregamento
+      setLoading(false);
     }
   };
 
@@ -70,6 +69,7 @@ function App() {
           <tbody>
             {viaturas.map((viatura) => (
               <tr key={viatura.ID}>
+                <td>{viatura.ID}</td> {/* Corrigido: Exibir o ID corretamente */}
                 <td>{viatura.Marca}</td>
                 <td>{viatura.Tipo}</td>
                 <td>{viatura.Nomenclatura}</td>
